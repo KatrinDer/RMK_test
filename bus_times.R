@@ -28,3 +28,6 @@ arr_meeting <- Toompark_posix + 240
 # will arrive on time?
 arr_on_time <- arr_meeting <= meeting
 
+# creating a new table with new data
+new_data <- data.frame(leaving_home,Zoo_posix,arr_meeting,late=!arr_on_time)
+new_data
