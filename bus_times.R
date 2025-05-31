@@ -2,7 +2,9 @@ install.packages("tidyverse")
 install.packages("ggplot2")
 install.packages("lubridate")
 
-
+library(tidyverse)
+library(ggplot2)
+library(lubridate)
 
 # Compiling a table with bus times
 Zoo <- c("08:05", "08:16", "08:28", "08:38", "08:48", "08:59") # departure from Zoo stop
