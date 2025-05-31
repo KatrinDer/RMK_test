@@ -37,4 +37,7 @@ ggplot(data=new_data)+
   geom_line(aes(x=leaving_home, y=arr_meeting), color=late)+
   geom_point(size=4)+
   geom_hline(yintercept = meeting, linetype=dashed, color= "red")
+
+# will be late
+late <- arr_meeting > meeting
   
