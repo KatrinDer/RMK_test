@@ -115,6 +115,8 @@ ggplot(data=new_data)+
 late_or_not <- data.frame(leaving_home,Zoo_posix,arr_meeting,being_late=late)
 late_or_not
 
+#conclusion
+# If Rita leaves home at 8:43, she will probably arrive at the meeting on time.
 
 
 
