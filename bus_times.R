@@ -118,6 +118,8 @@ late_or_not
 #conclusion
 # If Rita leaves home at 8:43, she will probably arrive at the meeting on time.
 
+#recommendation
+# Leave home 08:43 or earlier otherwise you may be late
 
 
 
