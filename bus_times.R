@@ -31,3 +31,10 @@ arr_on_time <- arr_meeting <= meeting
 # creating a new table with new data
 new_data <- data.frame(leaving_home,Zoo_posix,arr_meeting,late=!arr_on_time)
 new_data
+
+#making a plot for leaving home and arriving at the meeting
+ggplot(data=new_data)+
+  geom_line(aes(x=leaving_home, y=arr_meeting), color=late)+
+  geom_point(size=4)+
+  geom_hline(yintercept = meeting, linetype=dashed, color= "red")
+  
