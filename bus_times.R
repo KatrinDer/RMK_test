@@ -7,3 +7,6 @@ head(bus_times)
 # changing the times suitable for calculation
 Zoo_posix <- as.POSIXct(Zoo, format="%H:%M")
 Toompark_posix <- as.POSIXct(Toompark, format="%H:%M")
+
+# start of the meeting
+meeting <- as.POSIXct("09:05", format="%H:%M")
