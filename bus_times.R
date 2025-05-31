@@ -25,3 +25,6 @@ leaving_home <- Zoo_posix - 300
 # calculating the time to arrive at a meeting
 arr_meeting <- Toompark_posix + 240
 
+# will arrive on time?
+arr_on_time <- arr_meeting <= meeting
+
