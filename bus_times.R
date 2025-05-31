@@ -99,6 +99,26 @@ ggplot(data=new_data)+
            label = "black points = bus departure from Zoo stop", 
            hjust = 0, color = "black")
 
+ggplot(data=new_data)+
+  geom_line(aes(x=leaving_home, y=arr_meeting), color = "blue")+
+  geom_point(aes(x=leaving_home, y=arr_meeting), size = 2)+
+  geom_hline(yintercept = meeting, linetype = "dashed", color= "red")+
+  scale_x_datetime(date_labels = "%H:%M", date_breaks = "5 min")+
+  annotate("text", x = min(new_data$leaving_home), y = meeting + 10,
+           label = "red line = meeting time", hjust = 0, color = "red")+
+  annotate("text", x = min(new_data$leaving_home), 
+           y = max(new_data$arr_meeting) + 1,
+           label = "black points = bus departure from Zoo stop", 
+           hjust = 0, color = "black")
+
+#summary, being late or not
+late_or_not <- data.frame(leaving_home,Zoo_posix,arr_meeting,being_late=late)
+late_or_not
+
+
+
+
+
 
 
 
