@@ -10,3 +10,6 @@ Toompark_posix <- as.POSIXct(Toompark, format="%H:%M")
 
 # start of the meeting
 meeting <- as.POSIXct("09:05", format="%H:%M")
+
+# calculating the time to leave home
+leaving_home <- Zoo_posix - 300
