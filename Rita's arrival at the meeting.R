@@ -63,10 +63,3 @@ late_or_not
 
 #recommendation
 # Leave home 08:43 or earlier otherwise you may be late
-
-
-
-
-
-
-  
