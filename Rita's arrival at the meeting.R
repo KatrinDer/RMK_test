@@ -1,3 +1,4 @@
+# install packeges one by one
 install.packages("tidyverse")
 install.packages("ggplot2")
 install.packages("lubridate")
