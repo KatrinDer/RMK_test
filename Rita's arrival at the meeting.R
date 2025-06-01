@@ -28,77 +28,20 @@ arr_meeting <- Toompark_posix + 240
 # will arrive on time?
 arr_on_time <- arr_meeting <= meeting
 
+# will be late
+late <- arr_meeting > meeting
+
 # creating a new table with new data
 new_data <- data.frame(leaving_home,Zoo_posix,arr_meeting,late=!arr_on_time)
 new_data
 
 #making a plot for leaving home and arriving at the meeting
 ggplot(data=new_data)+
-  geom_line(aes(x=leaving_home, y=arr_meeting), color=late)+
-  geom_point(size=4)+
-  geom_hline(yintercept = meeting, linetype=dashed, color= "red")
-
-# will be late
-late <- arr_meeting > meeting
-
-#making a plot_1 for leaving home and arriving at the meeting
-ggplot(data=new_data)+
-  geom_line(aes(x=leaving_home, y=arr_meeting), color=late)+
-  geom_point(size=4)+
-  geom_hline(yintercept = meeting, linetype=dashed, color= "red")
-
-ggplot(data=new_data)+
-  geom_line(aes(x=leaving_home, y=arr_meeting), color=late)+
-  geom_point(size=4)+
-  geom_hline(yintercept = meeting, linetype = "dashed", color= "red")
-
-ggplot(data=new_data)+
-  geom_line(aes(x=leaving_home, y=arr_meeting), color = late)+
-  geom_point(aes(x=leaving_home, y=arr_meeting), size = 4)+
-  geom_hline
-
-ggplot(data=new_data)+
   geom_line(aes(x=leaving_home, y=arr_meeting), color = "blue")+
   geom_point(aes(x=leaving_home, y=arr_meeting), size = 4)+
   geom_hline(yintercept = meeting, linetype = "dashed", color= "red")
 
 # improving the plot
-ggplot(data=new_data)+
-  geom_line(aes(x=leaving_home, y=arr_meeting), color = "blue")+
-  geom_point(aes(x=leaving_home, y=arr_meeting), size = 4)+
-  geom_hline(yintercept = meeting, linetype = "dashed", color= "red")+
-  scale_x_datetime(date_labels = "%H:%M", date_breaks = "5 min")+
-  annotate("text", x = min(new_data$leaving_home), y = meeting + 1,
-           label = "red line = meeting time", hjust = 0, color = "red")+
-  annotate("text", x = min(new_data$leaving_home), 
-           y = max(new_data$arr_meeting) + 1,
-           label = "black points = bus departure from Zoo stop", 
-           hjust = 0, color = "black")
-
-ggplot(data=new_data)+
-  geom_line(aes(x=leaving_home, y=arr_meeting), color = "blue")+
-  geom_point(aes(x=leaving_home, y=arr_meeting), size = 4)+
-  geom_hline(yintercept = meeting, linetype = "dashed", color= "red")+
-  scale_x_datetime(date_labels = "%H:%M", date_breaks = "5 min")+
-  annotate("text", x = min(new_data$leaving_home), y = meeting + 3,
-           label = "red line = meeting time", hjust = 0, color = "red")+
-  annotate("text", x = min(new_data$leaving_home), 
-           y = max(new_data$arr_meeting) + 1,
-           label = "black points = bus departure from Zoo stop", 
-           hjust = 0, color = "black")
-
-ggplot(data=new_data)+
-  geom_line(aes(x=leaving_home, y=arr_meeting), color = "blue")+
-  geom_point(aes(x=leaving_home, y=arr_meeting), size = 4)+
-  geom_hline(yintercept = meeting, linetype = "dashed", color= "red")+
-  scale_x_datetime(date_labels = "%H:%M", date_breaks = "5 min")+
-  annotate("text", x = min(new_data$leaving_home), y = meeting + 10,
-           label = "red line = meeting time", hjust = 0, color = "red")+
-  annotate("text", x = min(new_data$leaving_home), 
-           y = max(new_data$arr_meeting) + 1,
-           label = "black points = bus departure from Zoo stop", 
-           hjust = 0, color = "black")
-
 ggplot(data=new_data)+
   geom_line(aes(x=leaving_home, y=arr_meeting), color = "blue")+
   geom_point(aes(x=leaving_home, y=arr_meeting), size = 2)+
@@ -108,7 +51,7 @@ ggplot(data=new_data)+
            label = "red line = meeting time", hjust = 0, color = "red")+
   annotate("text", x = min(new_data$leaving_home), 
            y = max(new_data$arr_meeting) + 1,
-           label = "black points = bus departure from Zoo stop", 
+           label = "black points = arrival at the meeting", 
            hjust = 0, color = "black")
 
 #summary, being late or not
