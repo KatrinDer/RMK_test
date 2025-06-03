@@ -52,12 +52,12 @@ new_data$prob_late <- predict(model, type = "response")
 
 #making a plot for being late depending time when leaving home
 ggplot(new_data, aes(x = leaving_home)) +
-  geom_line(aes(y = prob_late), color = "blue", linewidth = 1.2) +           # logistic curve
-  labs(x = "leaving home", y = "probably late", 
+  geom_line(aes(y = prob_late), color = "blue", linewidth = 1.2) + #logistic curve
+    labs(x = "leaving home", y = "probably late", 
        title = "The probability that Rita will be late due to the time she leaves home" )+
-  scale_x_datetime(date_labels = "%H:%M", date_breaks = "5 min")
- 
-#summary, being late or not
+  scale_x_datetime(date_labels = "%H:%M", date_breaks = "5 min",) 
+                   
+ #summary, being late or not
 late_or_not <- data.frame(leaving_home,Zoo_posix,arr_meeting,being_late=late)
 late_or_not
 
