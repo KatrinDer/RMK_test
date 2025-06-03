@@ -2,10 +2,12 @@
 install.packages("tidyverse")
 install.packages("ggplot2")
 install.packages("lubridate")
+install.packages("scales")
 
 library(tidyverse)
 library(ggplot2)
 library(lubridate)
+library(scales)
 
 # Compiling a table with bus times
 Zoo <- c("08:05", "08:16", "08:28", "08:38", "08:48", "08:59") # departure from Zoo stop
@@ -36,25 +38,25 @@ late <- arr_meeting > meeting
 new_data <- data.frame(leaving_home,Zoo_posix,arr_meeting,late=!arr_on_time)
 new_data
 
-#making a plot for leaving home and arriving at the meeting
-ggplot(data=new_data)+
-  geom_line(aes(x=leaving_home, y=arr_meeting), color = "blue")+
-  geom_point(aes(x=leaving_home, y=arr_meeting), size = 4)+
-  geom_hline(yintercept = meeting, linetype = "dashed", color= "red")
+# create a binary column where 1 = late and 0 = not late
+new_data$late <- as.integer(new_data$arr_meeting > meeting) 
 
-# improving the plot
-ggplot(data=new_data)+
-  geom_line(aes(x=leaving_home, y=arr_meeting), color = "blue")+
-  geom_point(aes(x=leaving_home, y=arr_meeting), size = 2)+
-  geom_hline(yintercept = meeting, linetype = "dashed", color= "red")+
-  scale_x_datetime(date_labels = "%H:%M", date_breaks = "5 min")+
-  annotate("text", x = min(new_data$leaving_home), y = meeting + 10,
-           label = "red line = meeting time", hjust = 0, color = "red")+
-  annotate("text", x = min(new_data$leaving_home), 
-           y = max(new_data$arr_meeting) + 1,
-           label = "black points = arrival at the meeting", 
-           hjust = 0, color = "black")
+# change time to numeric
+new_data$leaving_num <- as.numeric(new_data$leaving_home)
 
+# logistic regression to model the probability of late = 1 (being late)
+model <- glm(late ~ leaving_home, data = new_data, family = "binomial")
+
+# predict the probability of being late
+new_data$prob_late <- predict(model, type = "response")
+
+#making a plot for being late depending time when leaving home
+ggplot(new_data, aes(x = leaving_home)) +
+  geom_line(aes(y = prob_late), color = "blue", linewidth = 1.2) +           # logistic curve
+  labs(x = "leaving home", y = "probably late", 
+       title = "The probability that Rita will be late due to the time she leaves home" )+
+  scale_x_datetime(date_labels = "%H:%M", date_breaks = "5 min")
+ 
 #summary, being late or not
 late_or_not <- data.frame(leaving_home,Zoo_posix,arr_meeting,being_late=late)
 late_or_not
